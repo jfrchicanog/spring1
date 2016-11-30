@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="oferta3x2" class="es.uma.informatica.spring1.Oferta3x2">
+		<constructor-arg index="0" value="Leche"/>
+	</bean>
+	
+	<bean id="descuento20porciento" class="es.uma.informatica.spring1.Descuento20Porciento">
+		<constructor-arg index="0" value="Atún"/>
+	</bean>
+
+	<bean id="calculador" class="es.uma.informatica.spring1.CalculadorOfertas">
+		<constructor-arg index="0">
+			<list>
+				<ref bean="oferta3x2"/>
+				<ref bean="descuento20porciento"/>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>
