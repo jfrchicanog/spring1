@@ -20,4 +20,44 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="leche" class="es.uma.informatica.spring1.domain.LineaFactura">
+		<property name="producto">
+			<bean class="es.uma.informatica.spring1.domain.Producto">
+				<property name="nombre" value="Leche" />
+				<property name="precio" value="1.5" />
+			</bean>
+		</property>
+		<property name="cantidad" value="6" />
+	</bean>
+
+	<bean id="atun" class="es.uma.informatica.spring1.domain.LineaFactura">
+		<property name="producto">
+			<bean class="es.uma.informatica.spring1.domain.Producto">
+				<property name="nombre" value="Atún" />
+				<property name="precio" value="3.00"></property>
+			</bean>
+		</property>
+		<property name="cantidad" value="6"/>
+	</bean>
+
+	<bean id="queso" class="es.uma.informatica.spring1.domain.LineaFactura">
+		<property name="producto">
+			<bean class="es.uma.informatica.spring1.domain.Producto">
+				<property name="nombre" value="Queso" />
+				<property name="precio" value="3.40" />
+			</bean>
+		</property>
+		<property name="cantidad" value="2"/>
+	</bean>
+	
+	<bean id="factura" class="es.uma.informatica.spring1.domain.Factura">
+		<property name="lineas">
+			<list>
+				<ref bean="leche"/>
+				<ref bean="atun"/>
+				<ref bean="queso"/>
+			</list>
+		</property>
+	</bean>
+
 </beans>
