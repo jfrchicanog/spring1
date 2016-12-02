@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import es.uma.informatica.spring1.domain.Factura;
 import es.uma.informatica.spring1.domain.LineaFactura;
 import es.uma.informatica.spring1.domain.Producto;
 
 public class CalculadorOfertasTest {
+	
+	private ApplicationContext context;
+	
+	@Before
+	public void setup() {
+		context = new AnnotationConfigApplicationContext(Configuracion.class);
+	}
 
 	@Test
 	public void test() {
@@ -50,12 +60,7 @@ public class CalculadorOfertasTest {
 		Factura factura = new Factura();
 		factura.setLineas(lineas);
 		
-		List<Oferta> ofertas = new ArrayList<>();
-		ofertas.add(new Oferta3x2());
-		ofertas.add(new Descuento20Porciento("Queso"));
-		
-		CalculadorOfertas calculador = new CalculadorOfertas(ofertas);
-		
+		CalculadorOfertas calculador = context.getBean(CalculadorOfertas.class);
 		calculador.calcularOfertas(factura);
 		
 		Assert.assertEquals(23.44, factura.getTotal(), 0.001);
