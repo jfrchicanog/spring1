@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import es.uma.informatica.spring1.domain.Factura;
 import es.uma.informatica.spring1.domain.LineaFactura;
 import es.uma.informatica.spring1.domain.Producto;
 
 public class CalculadorOfertasTest {
+	
+	private ClassPathXmlApplicationContext context;
+	
+	@Before
+	public void setup() {
+		context = new ClassPathXmlApplicationContext("spring.xml");
+	}
 
 	@Test
 	public void test() {
@@ -50,11 +59,8 @@ public class CalculadorOfertasTest {
 		Factura factura = new Factura();
 		factura.setLineas(lineas);
 		
-		List<Oferta> ofertas = new ArrayList<>();
-		ofertas.add(new Oferta3x2());
-		ofertas.add(new Descuento20Porciento("Queso"));
 		
-		CalculadorOfertas calculador = new CalculadorOfertas(ofertas);
+		CalculadorOfertas calculador = context.getBean(CalculadorOfertas.class);
 		
 		calculador.calcularOfertas(factura);
 		
