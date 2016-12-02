@@ -50,12 +50,16 @@ public class CalculadorOfertasTest {
 		Factura factura = new Factura();
 		factura.setLineas(lineas);
 		
-		CalculadorOfertas calculador = new CalculadorOfertas();
+		List<Oferta> ofertas = new ArrayList<>();
+		ofertas.add(new Oferta3x2());
+		ofertas.add(new Descuento20Porciento("Queso"));
+		
+		CalculadorOfertas calculador = new CalculadorOfertas(ofertas);
 		
 		calculador.calcularOfertas(factura);
 		
-		Assert.assertEquals(24.80, factura.getTotal(), 0.001);
-		Assert.assertEquals(5, factura.getLineas().size());
+		Assert.assertEquals(23.44, factura.getTotal(), 0.001);
+		Assert.assertEquals(6, factura.getLineas().size());
 		
 	}
 
