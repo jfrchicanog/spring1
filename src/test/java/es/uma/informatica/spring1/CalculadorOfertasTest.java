@@ -5,12 +5,21 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.uma.informatica.spring1.domain.Factura;
 import es.uma.informatica.spring1.domain.LineaFactura;
 import es.uma.informatica.spring1.domain.Producto;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring.xml")
 public class CalculadorOfertasTest {
+	
+	@Autowired
+	private CalculadorOfertas calculador;
 
 	@Test
 	public void test() {
@@ -54,7 +63,7 @@ public class CalculadorOfertasTest {
 		ofertas.add(new Oferta3x2());
 		ofertas.add(new Descuento20Porciento("Queso"));
 		
-		CalculadorOfertas calculador = new CalculadorOfertas(ofertas);
+		calculador.setOfertas(ofertas);
 		
 		calculador.calcularOfertas(factura);
 		
